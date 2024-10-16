@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block title %}{{student.full_name}}{% endblock %}
+
+{% block content %}
+<div class="container nt-5">
+  <h1>Добавить нового студента</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{ forse.as_p}}
+    <div class="mb-3">
+      <label for="full_name" class="form-label">Имя</label>
+      <input type="text" class="form-control" id="full_name" name="full_name" value="{{ student.full_name }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="date_of_birth" class="form-label">Дата рождения</label>
+      <input type="text" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ student.date_of_birth|default:"nothing" }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="full_name" class="form-label">Куратор</label>
+      <input type="text" class="form-control" id="curator" name="curator" value="{{ student.curator|default:"nothing" }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="{%url 'student_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
+{%endblock%}
