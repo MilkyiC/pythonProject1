@@ -3,7 +3,7 @@ from django.db import models
 class Student(models.Model):
     full_name=models.CharField(verbose_name="ФИО",max_length=255)
     date_of_birth=models.DateField(verbose_name="Дата рождения")
-    image = models.ImageField(upload_to='photos/')
+    # image = models.ImageField(upload_to='photos/')
     curator=models.ForeignKey(
         'Curator',
         verbose_name="ФИО",

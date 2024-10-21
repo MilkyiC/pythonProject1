@@ -4,26 +4,17 @@ from django.urls import reverse_lazy
 from django.utils.translation.template import context_re
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView, CreateView
+from django_filters.views import FilterView
 
 from student.models import Student
+from student import filters
 
 
-# class FirstView(View):
-#     def get(self, request):
-#         return HttpResponse('Hello django')
-
-# class StudentListTemplateView(TemplateView):
-#     template_name = "student/student_list.html"
-#
-#     def get_context_data(self, **kwargs):
-#         context=super().get_context_data(**kwargs)
-#         context['students']=Student.objects.all()
-#         return context
-
-class StudentList(ListView):
-    template_name = '/student/student_list.html'
+class StudentList(FilterView):
+    template_name = 'student/student_list.html'
     model = Student
     context_object_name = 'students'
+    filterset_class = filters.Student
 
 class StudentDetail(DetailView):
     template_name = 'student/student_detail.html'
