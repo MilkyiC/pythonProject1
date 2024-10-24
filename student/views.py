@@ -10,11 +10,10 @@ from student.models import Student
 from student import filters
 
 
-class StudentList(FilterView):
+class StudentList(ListView):
     template_name = 'student/student_list.html'
     model = Student
     context_object_name = 'students'
-    filterset_class = filters.Student
 
 class StudentDetail(DetailView):
     template_name = 'student/student_detail.html'
