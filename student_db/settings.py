@@ -31,8 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'student',
     'django_bootstrap5',
-    'django_filters'
+    'django_filters',
+    'rest_framework',
+    'drf_spectacular',
 ]
+
+REST_FRAMEWORK={'DEFAULT_SCHEMA_CLASS0':'drf_spectacular.openapi.AutoSchema'}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

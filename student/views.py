@@ -5,9 +5,39 @@ from django.utils.translation.template import context_re
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView, CreateView
 from django_filters.views import FilterView
+from rest_framework import viewsets
 
-from student.models import Student
+from student.models import Student,Book,Passport,Curator,Course,Enrollment
 from student import filters
+from student import serialazers
+
+
+
+class StudentApi(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class=serialazers.Student
+
+class BookApi(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = serialazers.Book
+
+class CuratorApi(viewsets.ModelViewSet):
+    queryset = Curator.objects.all()
+    serializer_class = serialazers.Curator
+
+class CourseApi(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = serialazers.Course
+
+class EnrollmentApi(viewsets.ModelViewSet):
+    queryset = Enrollment.objects.all()
+    serializer_class = serialazers.Enrollment
+
+class PassportApi(viewsets.ModelViewSet):
+    queryset = Passport.objects.all()
+    serializer_class = serialazers.Passport
+
+
 
 
 class StudentList(ListView):

@@ -15,18 +15,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+# from django.db import router
 from django.urls import path
 from student import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+router=DefaultRouter()
+
+router.register('students',views.StudentApi,basename='students')
+router.register('books',views.BookApi,basename='books')
+router.register('curators',views.CuratorApi,basename='curators')
+router.register('courses',views.CourseApi,basename='courses')
+router.register('enrollments',views.EnrollmentApi,basename='enrollments')
+router.register('passports',views.PassportApi,basename='passports')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('first_view/',views.FirstView.as_view(),name='first_view'),
+    path('schema/',SpectacularAPIView.as_view(),name='schema'),
+    path('swagger/',SpectacularSwaggerView.as_view(),name='schema'),
     path('student_list/',views.StudentList.as_view(),name='student_list'),
     path('student/create/', views.StudentCreate.as_view(), name='student_create'),
     path('students/<int:pk>/',views.StudentDetail.as_view(),name='student_detail'),
     path('students/<int:pk>/update/',views.StudentUpdate.as_view(),name='student_update'),
     path('students/<int:pk>/delete/',views.StudentDelete.as_view(),name='student_delete')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+router.urls
